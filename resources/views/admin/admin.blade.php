@@ -9,8 +9,6 @@
             <input type="name" class="form-control" name="name">
 
         </div>
-
-
         <button type="submit" class="btn btn-primary">ADD</button>
     </form>
 @endsection
