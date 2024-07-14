@@ -1,10 +1,9 @@
     @include('admin.layout.head')
+    @include('admin.layout.sidebar')
+    <div class="container">
 
-    <main class="vh-100 container">
-        @section('main-content')
-
-        @show
-    </main>
+        @yield('main-content')
+    </div>
 
 
     @include('admin.layout.footer')

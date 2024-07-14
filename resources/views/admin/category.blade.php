@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
 @section('main-content')
     <h1>Display Category</h1>
+    <a href="{{route('category.add')}}"><button class="btn btn-primary">Add Category</button></a>
     <table class="table">
         <thead>
             <tr>
