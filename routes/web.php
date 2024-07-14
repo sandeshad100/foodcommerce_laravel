@@ -10,8 +10,12 @@ Route::get('/about', function () {
     return view('user.about');
 });
 
-Route::get('/admin', function () {
-    return view('admin.admin');
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/category/add', function () {
+    return view('admin.category_add');
 });
 Route::get('/category', function () {
     return view('admin.category');
