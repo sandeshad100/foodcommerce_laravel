@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('user.home');
-});
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
+
 Route::get('/about', function () {
     return view('user.about');
 });
