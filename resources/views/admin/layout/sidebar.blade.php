@@ -18,7 +18,7 @@
                         <div class="collapse show" id="home-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li><a href="{{route('category.show')}}" class="link-dark rounded">Category</a></li>
-                                <li><a href="#" class="link-dark rounded">Reports</a></li>
+                                <li><a href="{{route('product')}}" class="link-dark rounded">Product</a></li>
                             </ul>
                         </div>
                     </li>
