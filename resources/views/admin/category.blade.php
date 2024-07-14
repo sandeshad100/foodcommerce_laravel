@@ -17,8 +17,8 @@
                     <td>{{ $item->category_name }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
-                        <a href=""><button class="btn btn-success">Update</button></a>
-                        <a href=""><button class="btn btn-dander">Delete</button></a>
+                        <a href="{{route('category.edit', $item->id)}}"><button class="btn btn-success">Update</button></a>
+                        <a href="{{route('category.delete', $item->id)}}"><button class="btn btn-danger">Delete</button></a>
                     </td>
                 </tr>
             @endforeach
