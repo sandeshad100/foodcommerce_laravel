@@ -17,8 +17,8 @@
                         </button>
                         <div class="collapse show" id="home-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="{{route('category.show')}}" class="link-dark rounded">Category</a></li>
-                                <li><a href="{{route('product')}}" class="link-dark rounded">Product</a></li>
+                                <li><a href="{{ route('category.show') }}" class="link-dark rounded">Category</a></li>
+                                <li><a href="{{ route('product') }}" class="link-dark rounded">Product</a></li>
                             </ul>
                         </div>
                     </li>
@@ -29,9 +29,9 @@
                         </button>
                         <div class="collapse" id="dashboard-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="{{route('login')}}" class="link-dark rounded">Login</a></li>
-                                <li><a href="{{route('register')}}" class="link-dark rounded">Register</a></li>
-                                  <li><a href="{{route('logout')}}" class="link-dark rounded">LogOut</a></li>
+                                <li><a href="{{ route('login') }}" class="link-dark rounded">Login</a></li>
+                                <li><a href="{{ route('register') }}" class="link-dark rounded">Register</a></li>
+                                <li><a href="{{ route('logout') }}" class="link-dark rounded">LogOut</a></li>
                             </ul>
                         </div>
                     </li>

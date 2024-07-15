@@ -2,7 +2,7 @@
 
   @section('main-content')
   <h1>Product Add</h1>
-     <form action="{{ route('product.store') }}" method="post">
+     <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="product_name" class="form-label">Product Name</label>
@@ -23,6 +23,10 @@
                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                     @endforeach
                 </select>
+            </div>
+               <div class="mb-3">
+                <label for="product_name" class="form-label">File</label>
+                <input type="file" class="form-control" id="product_name" name="file" required>
             </div>
             <button type="submit" class="btn btn-primary">ADD PRODUCT</button>
         </form>
