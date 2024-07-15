@@ -1,7 +1,12 @@
 @extends('admin.layout.master')
 @section('main-content')
     <h1>Display Category</h1>
-    <a href="{{route('category.add')}}"><button class="btn btn-primary">Add Category</button></a>
+    @if (Auth::check() && Auth::user()->role === 'admin')
+        <a href="{{ route('category.add') }}">
+            <button class="btn btn-primary">Add Category</button>
+        </a>
+    @endif
+{{-- {{Auth::user()->created_at}} --}}
     <table class="table">
         <thead>
             <tr>
@@ -18,8 +23,10 @@
                     <td>{{ $item->category_name }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
-                        <a href="{{route('category.edit', $item->id)}}"><button class="btn btn-success">Update</button></a>
-                        <a href="{{route('category.delete', $item->id)}}"><button class="btn btn-danger">Delete</button></a>
+                        <a href="{{ route('category.edit', $item->id) }}"><button
+                                class="btn btn-success">Update</button></a>
+                        <a href="{{ route('category.delete', $item->id) }}"><button
+                                class="btn btn-danger">Delete</button></a>
                     </td>
                 </tr>
             @endforeach
