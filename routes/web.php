@@ -20,7 +20,7 @@ Route::get('about', function () {
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(ValidUser::class)->name('dashboard');
+})->middleware('is_admin:admin')->name('dashboard');
 
 Route::get('/category/add', function () {
     return view('admin.category_add');
@@ -30,7 +30,7 @@ Route::get('/category', function () {
 });
 
 // category
-Route::post('/category/store', [CategoryController::class,'store'])->name('category.store');
+Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
 
 Route::get('/category', [CategoryController::class, 'show'])->name('category.show');
 
