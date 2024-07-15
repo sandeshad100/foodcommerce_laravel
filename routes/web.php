@@ -13,7 +13,9 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('about', function () {
     return view('user.about');
 });
-
+Route::get('guest', function () {
+    return view('user.guest');
+});
 // Route::get('/dashboard', function () {
 //     return view('admin.dashboard');
 // })->middleware('auth')->name('dashboard');
@@ -22,27 +24,34 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('is_admin:admin')->name('dashboard');
 
-Route::get('/category/add', function () {
-    return view('admin.category_add');
-})->name('category.add');
-Route::get('/category', function () {
-    return view('admin.category');
-});
 
-// category
-Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::middleware(['auth', 'is_admin:admin'])->group(
+    function () {
+        // category
+        Route::get('/category/add', function () {
+            return view('admin.category_add');
+        })->name('category.add');
+        // Route::get('/category', function () {
+        //     return view('admin.category');
+        // });
 
+        Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+
+        //product
+
+        Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
+        Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    }
+);
+
+//read only for non admin
 Route::get('/category', [CategoryController::class, 'show'])->name('category.show');
-
-Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-Route::get('category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
-
-
-//product
 Route::get('/product', [ProductController::class, 'index'])->name('product');
-Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
-Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+
 
 //auth
 Route::view('login', 'auth.login')->name('login');
