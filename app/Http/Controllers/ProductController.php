@@ -29,7 +29,7 @@ class ProductController extends Controller
             'product_rate' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-            // 'file' => 'required|mimes:jpg,png,gif'
+             'file' => 'required|mimes:jpg,png,gif'
         ]);
 
         $product = new Product();
