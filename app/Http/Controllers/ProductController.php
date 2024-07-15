@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -22,23 +23,28 @@ class ProductController extends Controller
         //  dd($categories);
         return view('admin.product.product_add', compact('categories'));
     }
-    public function store(Request $request, Response $response){
+    public function store(Request $request, Response $response)
+    {
 
         $request->validate([
             'product_name' => 'required',
             'product_rate' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-             'file' => 'required|mimes:jpg,png,gif'
+            'file' => 'required|mimes:jpg,png,gif,jpeg'
         ]);
+
+        //image start
+        $imageName = time() . '.'.Auth::user()->id .'.'. $request->file->extension();
+        $request->file->move(public_path('image'), $imageName);
+        //image end
 
         $product = new Product();
         $product->product_name = $request->product_name;
         $product->product_rate = $request->product_rate;
         $product->description = $request->description;
         $product->category_id = $request->category_id;
-
-        // $filename = time() . '_' . $file->getClientOrginalName();
+        $product->image_path = 'image/' . $imageName;
         $product->save();
 
         return redirect()->route('product')->with('success', 'Product added successfully.');
