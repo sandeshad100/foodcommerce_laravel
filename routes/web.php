@@ -51,7 +51,7 @@ Route::middleware(['auth', 'is_admin:admin'])->group(
 Route::get('/category', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 
-
+Route::delete('/product/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
 
 //auth
 Route::view('login', 'auth.login')->name('login');

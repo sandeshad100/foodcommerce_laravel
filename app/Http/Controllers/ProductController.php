@@ -35,7 +35,7 @@ class ProductController extends Controller
         ]);
 
         //image start
-        $imageName = time() . '.'.Auth::user()->id .'.'. $request->file->extension();
+        $imageName = time() . '.'. $request->file->extension();
         $request->file->move(public_path('image'), $imageName);
         //image end
 
@@ -47,6 +47,27 @@ class ProductController extends Controller
         $product->image_path = 'image/' . $imageName;
         $product->save();
 
-        return redirect()->route('product')->with('success', 'Product added successfully.');
+        // return redirect()->route('product')->with('success', 'Product added successfully.');
+        return back()->withSuccess('Product added successfully.');
     }
+
+
+    public function destroy(Request $request)
+    {
+        $id = $request->id;
+        $product = Product::findOrFail($id); // Use findOrFail to handle non-existing product
+        $image_path = public_path($product->image_path); // Resolve the full path of the image
+        // dd($image_path);
+
+        // Delete the product from the database
+        $product->delete();
+
+        // Delete the image file if it exists
+        if (file_exists($image_path)) {
+            @unlink($image_path);
+        }
+
+        return redirect()->route('product')->with('success', 'Product deleted successfully.');
+    }
+
 }
