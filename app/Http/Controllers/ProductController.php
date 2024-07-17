@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +13,12 @@ class ProductController extends Controller
 {
     public function index(Request $request, Response $response)
     {
-        $products = DB::table('product')->join('categories', 'product.category_id', '=', 'categories.id')->get();
-        //  dd($categories);
+        $products = DB::table('product')
+        ->join('categories', 'product.category_id', '=', 'categories.id')
+        ->select('product.id', 'product.product_name', 'product.product_rate', 'product.description', 'product.image_path', 'product.category_id', 'product.created_at', 'product.updated_at', 'categories.category_name')
+        ->get();
+
+
 
         return view('admin.product.product', compact('products'));
     }
@@ -35,7 +40,7 @@ class ProductController extends Controller
         ]);
 
         //image start
-        $imageName = time() . '.'. $request->file->extension();
+        $imageName = time() . '.' . $request->file->extension();
         $request->file->move(public_path('image'), $imageName);
         //image end
 
@@ -52,14 +57,18 @@ class ProductController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->id;
-        $product = Product::findOrFail($id); // Use findOrFail to handle non-existing product
+
+        $product = DB::table('product')->where('id', $id)->first(); // Use findOrFail to handle non-existing product
+
+        // dd($product);
+
         $image_path = public_path($product->image_path); // Resolve the full path of the image
         // dd($image_path);
 
         // Delete the product from the database
+        $product = Product::find($id);
         $product->delete();
 
         // Delete the image file if it exists
@@ -67,7 +76,8 @@ class ProductController extends Controller
             @unlink($image_path);
         }
 
-        return redirect()->route('product')->with('success', 'Product deleted successfully.');
-    }
 
+
+        return back();
+    }
 }

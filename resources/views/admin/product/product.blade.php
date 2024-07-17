@@ -23,14 +23,9 @@
                     <td>{{ $item->category_name }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
-                        {{-- <a href="{{ route('product.edit', $item->id) }}"><button
-                                class="btn btn-success">Update</button></a> --}}
-                        <form action="{{ route('product.destroy') }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        <a href="{{ route('product.delete', $item->id) }}"><button
+                                class="btn btn-success">Delete</button></a>
+
                     </td>
                 </tr>
             @endforeach

@@ -41,7 +41,6 @@ Route::middleware(['auth', 'is_admin:admin'])->group(
         Route::get('category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
         //product
-
         Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
         Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
     }
@@ -51,7 +50,7 @@ Route::middleware(['auth', 'is_admin:admin'])->group(
 Route::get('/category', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 
-Route::delete('/product/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
 //auth
 Route::view('login', 'auth.login')->name('login');
