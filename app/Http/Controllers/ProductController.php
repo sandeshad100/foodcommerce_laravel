@@ -61,9 +61,7 @@ class ProductController extends Controller
     {
 
         $product = DB::table('product')->where('id', $id)->first(); // Use findOrFail to handle non-existing product
-
         // dd($product);
-
         $image_path = public_path($product->image_path); // Resolve the full path of the image
         // dd($image_path);
 
@@ -75,9 +73,6 @@ class ProductController extends Controller
         if (file_exists($image_path)) {
             @unlink($image_path);
         }
-
-
-
         return back();
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ValidUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,13 +18,12 @@ Route::get('about', function () {
 Route::get('guest', function () {
     return view('user.guest');
 });
-// Route::get('/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware('auth')->name('dashboard');
+Route::get('send-email', [EmailController::class, 'sendEmail']);
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('is_admin:admin')->name('dashboard');
+
 
 
 Route::middleware(['auth', 'is_admin:admin'])->group(
